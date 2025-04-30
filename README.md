@@ -1,39 +1,58 @@
-# API test automation with Jest and PactumJS
+Descrição do Projeto
+Este projeto realiza testes automatizados de API usando Jest + PactumJS na API pública EscuelaJS Products.
 
-> Simple integration between JestJS and PactumJS.
+Como executar os testes
+bash
+Copiar
+Editar
+npm install
+npm run test
+Tecnologias usadas
+PactumJS
 
-## GitHub Actions
+Jest + ts-jest
 
-[![Node.js CI](https://github.com/ugioni/integration-tests-jest/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/ugioni/integration-tests-jest/actions/workflows/node.js.yml)
+SonarCloud
 
-## SonarCloud
+GitHub Actions
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ugioni_integration-tests-jest&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ugioni_integration-tests-jest)
+Como funciona a integração com o SonarCloud
+Ao fazer um push para o repositório, a pipeline do GitHub Actions roda os testes automaticamente e envia os dados de cobertura de testes para o SonarCloud. O projeto está vinculado à organização angielleal-1.
 
-# Getting Started
+Descrição dos Cenários:
+Obter a lista de produtos (GET): Verifica se a API retorna a lista de produtos com status 200 OK.
 
-### Pactum docs:
- - [PactumJS](https://pactumjs.github.io/)
+Obter um produto específico (GET): Verifica se é possível acessar um produto específico pelo ID.
 
-### Prerequisites:
- - NodeJS `v20`
+Criar um novo produto (POST): Testa a criação de um produto com dados válidos, retornando status 201 Created.
 
-### How to run?
+Atualizar um produto existente (PUT): Verifica a atualização de um produto existente, retornando o status 200 OK e os dados atualizados.
 
-Inside of the project folder run:
+Deletar um produto (DELETE): Testa a exclusão de um produto, retornando o status 200 OK.
 
- 1. `npm install --save-dev`
- 1. `npm run ci`
+Criar um produto com dados inválidos (POST): Verifica se a API lida corretamente com dados inválidos, retornando um erro apropriado.
 
-After that you should see a `./output` folder with some `HTML` reports.
+Verificar resposta para produto inexistente (GET): Testa a resposta da API ao tentar acessar um produto inexistente, esperando um erro 404.
 
-### Docs to Api under tests: 
- - [Toolshop API](https://api.practicesoftwaretesting.com/api/documentation)
- - [Deck of Cards](https://deckofcardsapi.com/)
- - [JSON placeholder](https://jsonplaceholder.typicode.com/)
- - [http bin](http://httpbin.org/)
- - [rick and morty api](https://rickandmortyapi.com/documentation/#rest)
- - [Petstore](https://petstore.swagger.io/#/) 
- - [ServeRest](https://serverest.dev/#/)
- - [ServeRest - Datadog](https://p.datadoghq.eu/sb/421fcfee-35ec-11ee-b87f-da7ad0900005-2aaf85264a89d11b7001bcab452a266e?refresh_mode=sliding&theme=light&tpl_var_env%5B0%5D=serverest.dev&from_ts=1699931511294&to_ts=1699932411294&live=true)
- 
+Validar o preço do produto (POST/PUT): Verifica se o preço do produto é um número positivo ao criar ou atualizar um produto.
+
+Criar um produto com imagem inválida (POST): Testa a criação de um produto com uma URL de imagem inválida, esperando um erro apropriado.
+
+Validar a quantidade de produtos retornados (GET): Verifica se a lista de produtos contém pelo menos 5 itens, usando paginação.
+
+Filtrar produtos por preço máximo (GET): Testa o filtro de produtos baseado no preço máximo (price_max) retornando produtos que atendem ao critério de filtro.
+
+Scripts no package.json
+Adicione o seguinte para que o npm run test:ci funcione como esperado:
+
+json
+Copiar
+Editar
+"scripts": {
+  ...
+  "test:ci": "jest --config=jest.config.js --runInBand --detectOpenHandles --coverage"
+}
+✅ 5. Uso correto do PactumJS
+Está utilizando spec(), .withJson(), .withQuery(), .expectJsonLike(), etc., conforme a documentação oficial do PactumJS.
+
+Ótimo uso de StatusCodes.
