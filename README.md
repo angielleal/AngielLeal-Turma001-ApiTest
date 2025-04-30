@@ -55,4 +55,3 @@ Editar
 ✅ 5. Uso correto do PactumJS
 Está utilizando spec(), .withJson(), .withQuery(), .expectJsonLike(), etc., conforme a documentação oficial do PactumJS.
 
-Ótimo uso de StatusCodes.
